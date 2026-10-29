@@ -1,0 +1,45 @@
+# @package _global_
+# analysis/sim/coffee: computation here, presentation in analysis/sim/coffee/plot.yaml,
+# composed by hydra's defaults list below.
+defaults:
+- /paths_db
+- /shared/algo_colors
+- /analysis/sim/coffee/plot
+- _self_
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+model: diffusion
+env_name: PrepareCoffee
+run_name: coffee_recollect
+output_dir: analysis/results/coffee_recollect_sim
+plot_only: false
+obs_keys:
+- robot0_joint_pos
+angle_keys:
+- robot0_joint_pos
+ood:
+  k_neighbors: 10
+  normalize: true
+trajectory:
+  normalize: true
+  max_pretrain_demos: null
+  analyze_segments: true
+  min_segment_length: 5
+intervention_timing:
+  # Interventions separated by fewer than 10 timesteps are merged.
+  gap_threshold: 10
+only_metrics: []
+# Five BlenDAgger and five HG-DAgger rounds.
+runs:
+  hg_dagger: ${paths_db.sim_data_dir}/coffee_realmatch_hg_dagger_PrepareCoffee
+  combined_blend: ${paths_db.sim_data_dir}/coffee_realmatch_combined_blend_PrepareCoffee
+export:
+  dataset: coffee_recollect_sim
+  study: expert
+  task: coffee
+  environment: sim
+  methods:
+    hg_dagger: HG
+    combined_blend: Blended

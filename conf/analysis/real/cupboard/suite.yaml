@@ -1,0 +1,45 @@
+# Orchestration for run_analysis_suite: folder discovery and export wiring.
+data_root: ${paths_db.real_data_dir}
+algos:
+  dagger:
+    label: HG-DAgger
+  blended:
+    label: Blended (Ours)
+num_episodes: 15
+eval_num_episodes: 20
+include_ablations: true
+rounds:
+  dagger:
+  - cupboard_dagger_round1
+  - cupboard_dagger_round2
+  - cupboard_dagger_round3
+  - cupboard_dagger_round4
+  - cupboard_dagger_round5
+  blended:
+  - cupboard_blended_round1
+  - cupboard_blended_round2
+  - cupboard_blended_round3
+  - cupboard_blended_round4
+  - cupboard_blended_round5
+# Evaluation folders behind the reported success rates (20 episodes each).
+eval_rounds:
+  dagger:
+  - eval_dagger_round1
+  - eval_dagger_round2
+  - eval_dagger_round3
+  - eval_dagger_round4
+  - eval_dagger_round5
+  blended:
+  - eval_blended_round1
+  - eval_blended_round2
+  - eval_blended_round3
+  - eval_blended_round4
+  - eval_blended_round5
+pretrain:
+  folder: cupboard_pretrain
+  dataset: cupboard_proc.hdf5
+  label: Pretrain
+alpha:
+  zoom:
+    demo: demo_0
+    seconds: 5

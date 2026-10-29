@@ -1,0 +1,8 @@
+# @package _global_
+# BlenDAgger on Prepare Coffee retrained with training seed 456 (the base config uses 123).
+# Trains on the collected rounds of sim/coffee/blendagger; see scripts/train/train_seed_round.sh.
+
+defaults:
+  - /sim/coffee/blendagger
+  - _self_
+run_name: "coffee_realmatch_seed2"

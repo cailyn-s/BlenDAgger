@@ -1,0 +1,68 @@
+# @package _global_
+# BlenDAgger on Microwave Thawing (MicrowaveThawing).
+# The k-NN index and calibration are rebuilt before every round by main.py.
+# Training config: conf/robomimic/finetune.json (set in conf/paths_db.yaml).
+#
+#   python main.py --config-name sim/thawing/blendagger
+
+defaults:
+  - /paths_db
+  - _self_
+
+hydra:
+  output_subdir: null  # Prevents saving the .hydra/ config folder
+  run:
+    dir: .
+
+run_name: "thawing_realmatch"
+algo: "combined_blend"
+model: "diffusion"
+
+# control which stages of the pipeline to execute
+pipeline:
+  run_collect: true
+  run_train: true
+
+env:
+  name: "MicrowaveThawing"
+  fixed_env: "fixed_envs/fixed_env_state_thawing.npy"
+  horizon: 1500
+
+collection:
+  num_episodes: 10
+  button_for_intervention: true
+  input_device: "spacemouse"
+  num_iters: 5
+
+# k-NN policy-confidence signal (index path is suffixed per round by main.py).
+arbitration:
+  uncertainty_method: knn
+  knn_index_path: ./arbitration/knn_index_thawing_realmatch.pkl
+  # Calibration flags for the per-round k-NN index build (main.py _build_knn_calibration).
+  calib_loeo: false
+  calib_subsample: 4    # stops adjacent frames of one episode being each other's neighbours
+  calib_low_pct: 5
+  calib_high_pct: 95
+  calib_n_calib: 10000
+  calib_k: 10
+
+paths:
+  save_path: "${paths_db.base_save_path}"
+  config_path: "${paths_db.lookup.${model}.${env.name}.config_path}"
+  pretrained_model: "${paths_db.lookup.${model}.${env.name}.pretrained_model}"
+  pretrained_dataset: "${paths_db.lookup.${model}.${env.name}.pretrained_dataset}"
+  # Base path for the per-round k-NN calibration bounds (L_MIN/L_MAX).
+  uncertainty_path: "./arbitration/uncertainty_knn_thawing_realmatch.json"
+
+training:
+  train_data: null
+  train_only_intervention: false    # interventions + autonomous rollouts; the real robot omits rollouts
+  num_epochs: 150
+  save_every_n_epochs: 50          # checkpoints at 50/100/150
+  aggregate_data: true
+  aggregate_pretrain: true
+  freeze_encoder: true
+  use_iwr: true
+  save_rollout_freq: 1
+  training_mode: "default"  # "default" or "human_targets"
+

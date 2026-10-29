@@ -1,0 +1,59 @@
+data/*
+results/*
+videos/*
+plots/*
+*__pycache__*
+*.TXT
+*.txt
+*.log
+*.png
+*.pkl
+*.npz
+*.json
+*.csv
+*.tex
+*.sh
+*.yaml
+*.mp4
+*.npy
+local_store/
+
+# Release files that the extension rules above would otherwise drop
+!conf/paths_db.yaml
+!conf/paths_local.example.yaml
+!conf/analysis/**/*.yaml
+!conf/sim/**/*.yaml
+!conf/real/*.yaml
+!conf/shared/*.yaml
+!conf/robomimic/*.json
+!requirements-sim.txt
+!setup_sim.sh
+!scripts/**/*.sh
+!fixed_envs/fixed_env_state_*.npy
+logs/
+
+# Machine-local folders (symlinks into local storage, outputs, notes, external clones)
+/data
+/results
+notes/
+analysis/results/
+# Exploratory code kept out of the release
+exploratory/
+# Machine-specific paths (template: conf/paths_local.example.yaml) and cluster job scripts
+conf/local/
+ops/
+# Pinned simulator dependencies cloned by setup_sim.sh
+third_party/
+# Configs, scenes and scripts not used for any result reported in the paper
+unreported/
+outputs/
+.pytest_cache/
+diffusion_repo/
+eval_local/
+eval_composite_results/
+queue/
+
+# Backup copies
+*.bak
+*.bak_*
+*.localbak

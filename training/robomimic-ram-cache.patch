@@ -1,0 +1,59 @@
+diff --git a/robomimic/utils/dataset.py b/robomimic/utils/dataset.py
+index 499714f..992ece6 100644
+--- a/robomimic/utils/dataset.py
++++ b/robomimic/utils/dataset.py
+@@ -78,11 +78,13 @@ class SequenceDataset(torch.utils.data.Dataset):
+ 
+             goal_mode (str): either "last" or None. Defaults to None, which is to not fetch goals
+ 
+-            hdf5_cache_mode (str): one of ["all", "low_dim", or None]. Set to "all" to cache entire hdf5 
+-                in memory - this is by far the fastest for data loading. Set to "low_dim" to cache all 
+-                non-image data. Set to None to use no caching - in this case, every batch sample is 
+-                retrieved via file i/o. You should almost never set this to None, even for large 
+-                image datasets.
++            hdf5_cache_mode (str): one of ["all", "ram", "low_dim", or None]. Set to "all" to cache entire
++                hdf5 in memory - this is by far the fastest for data loading. Set to "ram" to cache the
++                same data but skip memoizing assembled sequences: same zero disk i/o, but much less
++                memory, since "all" stores one padded window per frame.
++                Set to "low_dim" to cache all non-image data. Set to None to use no caching - in this
++                case, every batch sample is retrieved via file i/o. You should almost never set this to
++                None, even for large image datasets.
+ 
+             hdf5_use_swmr (bool): whether to use swmr feature when opening the hdf5 file. This ensures
+                 that multiple Dataset instances can all access the same hdf5 file without problems.
+@@ -107,7 +109,7 @@ class SequenceDataset(torch.utils.data.Dataset):
+         self.hdf5_normalize_obs = hdf5_normalize_obs
+         self._hdf5_file = None
+ 
+-        assert hdf5_cache_mode in ["all", "low_dim", None]
++        assert hdf5_cache_mode in ["all", "ram", "low_dim", None]
+         self.hdf5_cache_mode = hdf5_cache_mode
+ 
+         self.load_next_obs = load_next_obs
+@@ -153,7 +155,7 @@ class SequenceDataset(torch.utils.data.Dataset):
+         self.action_normalization_stats = None
+ 
+         # maybe store dataset in memory for fast access
+-        if self.hdf5_cache_mode in ["all", "low_dim"]:
++        if self.hdf5_cache_mode in ["all", "ram", "low_dim"]:
+             obs_keys_in_memory = self.obs_keys
+             if self.hdf5_cache_mode == "low_dim":
+                 # only store low-dim observations
+@@ -449,7 +451,7 @@ class SequenceDataset(torch.utils.data.Dataset):
+         """
+ 
+         # check if this key should be in memory
+-        key_should_be_in_memory = (self.hdf5_cache_mode in ["all", "low_dim"])
++        key_should_be_in_memory = (self.hdf5_cache_mode in ["all", "ram", "low_dim"])
+         if key_should_be_in_memory:
+             # if key is an observation, it may not be in memory
+             if '/' in key:
+@@ -873,7 +875,7 @@ class R2D2Dataset(SequenceDataset):
+         """
+ 
+         # check if this key should be in memory
+-        key_should_be_in_memory = try_to_use_cache and (self.hdf5_cache_mode in ["all", "low_dim"])
++        key_should_be_in_memory = try_to_use_cache and (self.hdf5_cache_mode in ["all", "ram", "low_dim"])
+         if key_should_be_in_memory:
+             # if key is an observation, it may not be in memory
+             if '/' in key:

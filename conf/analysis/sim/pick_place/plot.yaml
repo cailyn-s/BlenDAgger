@@ -1,0 +1,31 @@
+# @package _global_
+# Presentation settings, merged via the defaults list in analysis/sim/pick_place.yaml.
+plot:
+  run_names:
+  - hg_dagger
+  - combined_blend
+  - blended_noMag
+  - blended_noSim
+  - blended_noUQ
+  run_labels:
+  - HG-DAgger
+  - Blended (Ours)
+  - Blended (${ablation_labels.Mag})
+  - Blended (${ablation_labels.Sim})
+  - Blended (${ablation_labels.UQ})
+  run_colors:
+  - ${algo_colors.dagger}
+  - ${algo_colors.blended}
+  - ${ablation_colors.Mag}
+  - ${ablation_colors.Sim}
+  - ${ablation_colors.UQ}
+  # Marks sim figures; real-robot figures carry no suffix.
+  title_suffix: " (Sim)"
+  task_name: Pick and Place
+show_titles: true
+
+# Writes results/<task>/alpha/sessions.json; also the zoom window.
+alpha:
+  zoom:
+    demo: demo_0
+    seconds: 5

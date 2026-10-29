@@ -1,0 +1,26 @@
+# Responsiveness column of the coffee (robocasa PrepareCoffee) ablation table.
+#   python analysis/ablation_responsiveness.py --config analysis/ablation_responsiveness
+task: coffee
+# --data-root overrides.
+data_root: ${paths_db.sim_data_dir}
+control_hz: 20
+collection_action_scale: 1.0
+# Measured effective OSC velocities under HG-DAgger, not output_max x control_freq.
+max_linear_vel: 0.290
+max_angular_vel: 0.969
+# robosuite OSC_POSE applies rotation deltas in the world frame (left-multiplied).
+angular_frame: world
+angular_frame_yaw: 0.0
+
+intervention_timing: { gap_seconds: 1.0 }
+
+runs:
+  HG-DAgger:          coffee_realmatch_hg_dagger_PrepareCoffee
+  BlenDAgger:         coffee_realmatch_combined_blend_PrepareCoffee
+  Without uncertainty: coffee_realmatch_v2_combined_blend_no_uncertainty_PrepareCoffee
+  Without similarity: coffee_realmatch_combined_blend_no_similarity_PrepareCoffee
+  Without magnitude:  coffee_realmatch_combined_blend_no_magnitude_PrepareCoffee
+  Only uncertainty:   coffee_realmatch_combined_blend_only_uncertainty_PrepareCoffee
+  Only similarity:    coffee_realmatch_combined_blend_only_similarity_PrepareCoffee
+  Only magnitude:     coffee_realmatch_combined_blend_only_magnitude_PrepareCoffee
+  Fixed-alpha:        coffee_realmatch_linear_blend_PrepareCoffee

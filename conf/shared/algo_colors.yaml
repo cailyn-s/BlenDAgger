@@ -1,0 +1,19 @@
+# @package _global_
+# Figure colors shared by every task (real and sim).
+algo_colors:
+  # Opaque equivalents of 45% alpha on white, so every plotting path renders them the same.
+  dagger: '#98d9d2'
+  blended: '#bc86d8'
+  teleop: '0.6'
+  pretrain: '0.6'
+
+# Ablation palette, keyed by the suffix detect_ablation_rounds yields.
+# Human-facing name for each ablation, so every figure words them identically.
+ablation_labels:
+  Mag: "no magnitude"
+  Sim: "no similarity"
+  UQ: "no uncertainty"
+ablation_colors:
+  Mag: '#c5efb1'
+  Sim: '#b1efd2'
+  UQ: '#efb1d8'

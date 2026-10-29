@@ -1,0 +1,7 @@
+# cupboard analysis config, merged in order by run_analysis_suite.load_task_config(); later parts win.
+includes:
+  - analysis/real/cupboard/run
+  - analysis/real/cupboard/compute
+  - shared/algo_colors
+  - analysis/real/cupboard/plot
+  - analysis/real/cupboard/suite

@@ -1,0 +1,27 @@
+# Computation settings only.
+env_name: Almond
+model: diffusion
+control_hz: 30
+obs_keys:
+- arm_qpos
+angle_keys:
+- arm_qpos
+ood:
+  k_neighbors: 10
+  normalize: true
+  # Round 2 ran a checkpoint fine-tuned on the expert's round 1, so OOD is measured against it.
+  reference_sets:
+    dagger:
+      2:
+      - ${paths_db.real_data_dir}/almond/almond_dagger_round1
+    blended:
+      2:
+      - ${paths_db.real_data_dir}/almond/almond_blended_round1
+trajectory:
+  normalize: true
+  max_pretrain_demos: null
+  analyze_segments: true
+  min_segment_length: 5
+intervention_timing:
+  # 10 timesteps (0.33s at 30Hz), the merge window the paper reports.
+  gap_threshold: 10

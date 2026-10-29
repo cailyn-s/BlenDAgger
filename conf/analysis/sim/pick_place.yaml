@@ -1,0 +1,55 @@
+# @package _global_
+# analysis/sim/pick_place: computation here, presentation in analysis/sim/pick_place/plot.yaml,
+# composed by hydra's defaults list below.
+defaults:
+- /paths_db
+- /shared/algo_colors
+- /analysis/sim/pick_place/plot
+- _self_
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+model: diffusion
+env_name: PnPCounterToCab
+run_name: lemon
+output_dir: analysis/results/lemon_sim
+plot_only: false
+obs_keys:
+- robot0_joint_pos
+angle_keys:
+- robot0_joint_pos
+ood:
+  k_neighbors: 10
+  normalize: true
+trajectory:
+  normalize: true
+  max_pretrain_demos: null
+  analyze_segments: true
+  min_segment_length: 5
+intervention_timing:
+  # Interventions separated by fewer than 10 timesteps are merged.
+  gap_threshold: 10
+only_metrics: []
+# BlenDAgger and HG-DAgger collections, plus the BlenDAgger component ablations.
+runs:
+  hg_dagger: ${paths_db.sim_data_dir}/lemon_realmatch_hg_dagger_PnPCounterToCab
+  combined_blend: ${paths_db.sim_data_dir}/lemon_realmatch_combined_blend_PnPCounterToCab
+  blended_noMag: ${paths_db.sim_data_dir}/lemon_realmatch_combined_blend_no_magnitude_PnPCounterToCab
+  blended_noSim: ${paths_db.sim_data_dir}/lemon_realmatch_combined_blend_no_similarity_PnPCounterToCab
+  blended_noUQ: ${paths_db.sim_data_dir}/lemon_realmatch_combined_blend_no_uncertainty_PnPCounterToCab
+export:
+  dataset: lemon_sim
+  study: expert
+  task: lemon
+  environment: sim
+  methods:
+    hg_dagger: HG
+    combined_blend: Blended
+  rollouts:
+    HG:
+      1: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_hg_dagger_PnPCounterToCab_round1.json
+      2: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_hg_dagger_PnPCounterToCab_round2.json
+    Blended:
+      1: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_combined_blend_PnPCounterToCab_round1.json
+      2: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_combined_blend_PnPCounterToCab_round2.json

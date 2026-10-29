@@ -1,0 +1,61 @@
+# @package _global_
+# Prepare Coffee ablation: BlenDAgger with the magnitude term only; otherwise identical to sim/coffee/blendagger.
+# The k-NN settings below are unused by this algo.
+# Data/results folder: coffee_realmatch_combined_blend_only_magnitude_PrepareCoffee
+#
+#   python main.py --config-name sim/coffee/ablations/only_magnitude
+
+defaults:
+  - /paths_db
+  - _self_
+
+hydra:
+  output_subdir: null  # Prevents saving the .hydra/ config folder
+  run:
+    dir: .
+
+run_name: "coffee_realmatch"
+algo: "combined_blend_only_magnitude"
+model: "diffusion"
+
+# control which stages of the pipeline to execute
+pipeline:
+  run_collect: true
+  run_train: true
+
+env:
+  name: "PrepareCoffee"
+  fixed_env: "fixed_envs/fixed_env_state_coffee.npy"
+  horizon: 1000
+
+collection:
+  num_episodes: 10
+  button_for_intervention: true
+  input_device: "spacemouse"
+  num_iters: 5
+
+# k-NN policy-confidence signal (index path is suffixed per round by main.py).
+arbitration:
+  uncertainty_method: knn
+  knn_index_path: ./arbitration/knn_index_coffee_realmatch.pkl
+
+paths:
+  save_path: "${paths_db.base_save_path}"
+  config_path: "${paths_db.lookup.${model}.${env.name}.config_path}"
+  pretrained_model: "${paths_db.lookup.${model}.${env.name}.pretrained_model}"
+  pretrained_dataset: "${paths_db.lookup.${model}.${env.name}.pretrained_dataset}"
+  # Base path for the per-round k-NN calibration bounds (L_MIN/L_MAX).
+  uncertainty_path: "./arbitration/uncertainty_knn_coffee_realmatch.json"
+
+training:
+  train_data: null
+  train_only_intervention: false    # interventions + autonomous rollouts; the real robot omits rollouts
+  num_epochs: 150
+  save_every_n_epochs: 50          # checkpoints at 50/100/150
+  aggregate_data: true
+  aggregate_pretrain: true
+  freeze_encoder: true
+  use_iwr: true
+  save_rollout_freq: 1
+  training_mode: "default"  # "default" or "human_targets"
+

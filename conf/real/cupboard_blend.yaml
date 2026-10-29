@@ -1,0 +1,28 @@
+env: real
+
+policy:
+  policy: diffusion
+  ckpt_dir: checkpoints/cupboard_base.ckpt
+
+arbitration:
+  teleop: oculus
+  algo: combined_blend
+  alpha_smoothing: 0.5
+  uncertainty_method: knn
+  uncertainty_path: ./Shared-Control-DAgger/arbitration/uncertainty_knn_cupboard.json
+  knn_index_path: Shared-Control-DAgger/arbitration/knn_index_cupboard.pkl
+
+motion:
+  action_scale: 0.8
+  collection_action_scale: 0.8
+
+cameras:
+  cameras: [orbbec1, orbbec2]
+  show_cameras: true
+
+collection:
+  num_episodes: 15
+  save: true
+  save_images: true
+  output_dir: data/cupboard
+  task_name: cupboard_blended_round1

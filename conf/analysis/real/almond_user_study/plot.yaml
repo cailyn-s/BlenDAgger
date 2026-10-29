@@ -1,0 +1,8 @@
+# Presentation settings only.
+task_name: Almond Scooping
+title_suffix: ' (User Study)'
+subtask_labels:
+- Pick Up Scooper
+- Scoop Almonds
+- Deposit Almonds
+- Place Scooper

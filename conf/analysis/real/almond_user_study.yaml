@@ -1,0 +1,7 @@
+# almond_user_study analysis config, merged in order by run_analysis_suite.load_task_config(); later parts win.
+includes:
+  - analysis/real/almond_user_study/run
+  - analysis/real/almond_user_study/compute
+  - shared/algo_colors
+  - analysis/real/almond_user_study/plot
+  - analysis/real/almond_user_study/suite

@@ -1,0 +1,20 @@
+# @package _global_
+# Presentation settings, merged via the defaults list in analysis/sim/coffee.yaml.
+plot:
+  run_names:
+  - hg_dagger
+  - combined_blend
+  run_labels:
+  - HG-DAgger
+  - Blended (Ours)
+  run_colors:
+  - ${algo_colors.dagger}
+  - ${algo_colors.blended}
+  title_suffix: " (Sim)"
+  task_name: Coffee Preparation
+show_titles: true
+
+alpha:
+  zoom:
+    demo: demo_0
+    seconds: 5

@@ -1,0 +1,9 @@
+# Presentation settings only.
+task_name: Cupboard Stowing
+title_suffix: ' (User Study)'
+subtask_labels:
+- Approach
+- Open Cupboard
+- Grab Can
+- Place Can
+- Close Cupboard

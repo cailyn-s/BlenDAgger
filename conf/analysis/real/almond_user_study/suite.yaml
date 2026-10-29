@@ -1,0 +1,35 @@
+# Orchestration for run_analysis_suite: folder discovery and export wiring.
+data_root: ${paths_db.real_data_dir}
+algos:
+  dagger:
+    label: HG-DAgger
+    method: HG
+  blended:
+    label: Blended (Ours)
+    method: Blended
+  teleop:
+    label: Teleoperation
+    method: Teleop
+num_episodes: 5
+eval_num_episodes: 20
+include_ablations: false
+rounds_pattern:
+  dagger: ^(.+)_dagger_round(\d+)$
+  blended: ^(.+)_blended_round(\d+)$
+  teleop: ^(.+)_teleop_practice()$
+exclude_sessions:
+- test
+- test1
+pretrain:
+  folder: ${paths_db.real_data_dir}/almond/almond_pretrain
+  dataset: almond_proc.hdf5
+  label: Pretrain
+alpha:
+  zoom:
+    demo: demo_0
+    seconds: 5
+study: user_study
+environment: real
+data_dir: ${paths_db.real_data_dir}/almond_user_study
+export_task: almond
+export_dataset: almond_user_study

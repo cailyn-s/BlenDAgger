@@ -1,0 +1,14 @@
+# @package _global_
+# Prepare Coffee ablation: trains on the human action instead of the executed blended action,
+# using the BlenDAgger collection (training/patch_human_targets.py; robot action where the human is idle).
+# Results folder: coffee_realmatch_combined_blend_human_targets_PrepareCoffee
+#
+#   python main.py --config-name sim/coffee/ablations/human_targets
+defaults:
+  - /sim/coffee/blendagger
+  - _self_
+pipeline:
+  run_collect: false   # trains on the BlenDAgger collection below
+training:
+  training_mode: "human_targets"
+  train_data: ${paths_db.sim_data_dir}/coffee_realmatch_combined_blend_PrepareCoffee

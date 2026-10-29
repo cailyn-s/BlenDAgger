@@ -1,0 +1,3 @@
+# Task name and output folder.
+task: almond_user_study
+output_dir: analysis/results/almond_user_study

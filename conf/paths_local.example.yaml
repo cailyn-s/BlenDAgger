@@ -1,0 +1,17 @@
+# @package _global_
+# Copy to conf/local/paths.yaml (gitignored) and edit. Anything set here overrides
+# conf/paths_db.yaml; leave out whatever the defaults already get right.
+paths_db:
+  # Root for collected data/ and finetuned results/ (default: the repo root).
+  base_save_path: /path/to/storage
+  # Base demonstration datasets, patched_*.hdf5 (default: <base_save_path>/data).
+  dataset_dir: /path/to/datasets
+  # Pretrained base policies, named as in conf/paths_db.yaml (default: <base_save_path>/checkpoints).
+  checkpoint_dir: /path/to/checkpoints
+  # Real-robot collections (default: <base_save_path>/data).
+  real_data_dir: /path/to/real_robot_data
+  # Point a single checkpoint somewhere else without renaming it:
+  lookup:
+    diffusion:
+      PrepareCoffee:
+        pretrained_model: /path/to/my_coffee_policy.pth

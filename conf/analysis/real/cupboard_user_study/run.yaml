@@ -1,0 +1,3 @@
+# Task name and output folder.
+task: cupboard_user_study
+output_dir: analysis/results/cupboard_user_study

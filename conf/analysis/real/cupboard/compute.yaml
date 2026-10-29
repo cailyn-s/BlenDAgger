@@ -1,0 +1,19 @@
+# Computation settings only.
+env_name: Cupboard
+model: diffusion
+control_hz: 30
+obs_keys:
+- arm_qpos
+angle_keys:
+- arm_qpos
+ood:
+  k_neighbors: 10
+  normalize: true
+trajectory:
+  normalize: true
+  max_pretrain_demos: null
+  analyze_segments: true
+  min_segment_length: 5
+intervention_timing:
+  # 10 timesteps (0.33s at 30Hz), the merge window the paper reports.
+  gap_threshold: 10

@@ -1,0 +1,17 @@
+# Orchestration for run_analysis_suite: folder discovery and export wiring.
+data_root: ${paths_db.real_data_dir}
+algos:
+  dagger:
+    label: HG-DAgger
+  blended:
+    label: Blended (Ours)
+num_episodes: 15
+eval_num_episodes: 20
+pretrain:
+  folder: almond_pretrain
+  dataset: almond_proc.hdf5
+  label: Pretrain
+alpha:
+  zoom:
+    demo: demo_0
+    seconds: 5
