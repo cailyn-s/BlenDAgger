@@ -9,8 +9,8 @@ arbitration:
   algo: combined_blend
   alpha_smoothing: 0.5
   uncertainty_method: knn
-  uncertainty_path: ./Shared-Control-DAgger/arbitration/uncertainty_knn_almond.json
-  knn_index_path: Shared-Control-DAgger/arbitration/knn_index_almond.pkl
+  uncertainty_path: ./BlenDAgger/arbitration/uncertainty_knn_almond.json
+  knn_index_path: BlenDAgger/arbitration/knn_index_almond.pkl
 
 motion:
   action_scale: 0.8

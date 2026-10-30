@@ -84,7 +84,7 @@ class XArmKNNUncertaintyEstimator(BaseUncertaintyEstimator):
     k-NN distance in obs encoder feature space for XArmDiffusionPolicy.
 
     Build the index with:
-      python Shared-Control-DAgger/arbitration/build_knn_index.py \\
+      python BlenDAgger/arbitration/build_knn_index.py \\
           --robot-type xarm --ckpt-dir <ckpt> --dataset <data.hdf5> \\
           --output knn_index.pkl --calib-out uncertainty_knn.json
 
@@ -155,7 +155,7 @@ class RobomimicKNNUncertaintyEstimator(BaseUncertaintyEstimator):
     (RoboCasa simulation experiments).
 
     Build the index with:
-      python Shared-Control-DAgger/arbitration/build_knn_index.py \\
+      python BlenDAgger/arbitration/build_knn_index.py \\
           --robot-type robomimic --ckpt-path <ckpt.pth> --dataset <data.hdf5> \\
           --output knn_index.pkl --calib-out uncertainty_knn.json
 

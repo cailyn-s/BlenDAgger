@@ -62,8 +62,8 @@ fixed_envs/    saved RoboCasa scenes
 ### 1) Clone the repo
 
 ```bash
-git clone https://github.com/cailyn-s/Shared-Control-DAgger.git
-cd Shared-Control-DAgger
+git clone https://github.com/cailyn-s/BlenDAgger.git
+cd BlenDAgger
 ```
 
 ### 2) Create the environment
@@ -234,10 +234,10 @@ Base and fine-tuned policies use the Diffusion Policy fork in the companion repo
 Rebuild it for every new checkpoint:
 
 ```bash
-python Shared-Control-DAgger/arbitration/build_knn_index.py --robot-type xarm \
+python BlenDAgger/arbitration/build_knn_index.py --robot-type xarm \
     --ckpt-dir <checkpoint> --dataset data/cupboard \
-    --output Shared-Control-DAgger/arbitration/knn_index_cupboard.pkl \
-    --calib-out Shared-Control-DAgger/arbitration/uncertainty_knn_cupboard.json
+    --output BlenDAgger/arbitration/knn_index_cupboard.pkl \
+    --calib-out BlenDAgger/arbitration/uncertainty_knn_cupboard.json
 ```
 
 ### 5) Collect a round
@@ -247,7 +247,7 @@ policies at `checkpoints/cupboard_base.ckpt` and `checkpoints/almond_base.ckpt`;
 command line, such as `--ckpt-dir`, overrides the preset:
 
 ```bash
-python scripts/collect.py --config Shared-Control-DAgger/conf/real/cupboard_blend.yaml \
+python scripts/collect.py --config BlenDAgger/conf/real/cupboard_blend.yaml \
     --ckpt-dir <checkpoint> --task-name cupboard_blended_round1
 ```
 
