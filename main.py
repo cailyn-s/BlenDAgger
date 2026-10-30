@@ -790,7 +790,7 @@ def merge_robomimic_datasets(dataset_paths, output_path):
 @hydra.main(version_base=None, config_path="conf", config_name="sim/coffee/blendagger")
 def run_pipeline(cfg: DictConfig):
     if OmegaConf.select(cfg, "pipeline.run_eval", default=False):
-        raise ValueError("pipeline.run_eval is not supported; evaluate with scripts/eval/eval_composite.py or scripts/eval/eval_realmatch.py")
+        raise ValueError("pipeline.run_eval is not supported; evaluate with scripts/eval/eval_composite.py")
     os.makedirs(cfg.paths.save_path, exist_ok=True)
     
     collect_only = cfg.pipeline.run_collect and not cfg.pipeline.run_train

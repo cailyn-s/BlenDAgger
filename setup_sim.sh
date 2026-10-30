@@ -9,7 +9,8 @@ ENV=${1:-blendagger}
 DEPS=third_party
 
 eval "$(conda shell.bash hook)"
-conda env list | grep -q "^$ENV " || conda create -y -n "$ENV" python=3.10
+# conda-forge: Anaconda's default channels stop on an unaccepted Terms of Service prompt.
+conda env list | grep -q "^$ENV " || conda create -y -n "$ENV" --override-channels -c conda-forge python=3.10
 conda activate "$ENV"
 pip install -r requirements-sim.txt
 
@@ -33,6 +34,6 @@ fi
 
 python "$DEPS/robosuite/robosuite/scripts/setup_macros.py"
 python "$DEPS/robocasa/robocasa/scripts/setup_macros.py"
-python "$DEPS/robocasa/robocasa/scripts/download_kitchen_assets.py"   # ~5 GB, asks before downloading
+python "$DEPS/robocasa/robocasa/scripts/download_kitchen_assets.py"   # ~8 GB on disk, asks before downloading
 
 echo "Done. conda activate $ENV"

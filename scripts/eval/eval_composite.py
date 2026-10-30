@@ -1,12 +1,10 @@
-"""Eval one composite-task run (PrepareCoffee / MicrowaveThawing), with subtask breakdowns.
+"""Eval one sim run (PrepareCoffee / MicrowaveThawing / PnPCounterToCab).
 
-Same machinery as eval_realmatch.py, differing where the composite
-tasks differ:
-  * horizon 1000 for coffee, 1500 for thawing, not 500
-  * finetune runs are scored at epoch 150 (the final checkpoint); the base policy is labelled
-    with its training epoch (1000; 900 for Pick and Place)
-  * can score the BASE (pretrained) policy, which eval_realmatch.py has no path for
-  * reports per-subtask rates alongside overall success, via evaluation/patch_subtask_success.py
+  * horizon 1000 for coffee, 1500 for thawing, 500 for pick and place
+  * finetune runs are scored at epoch 150 (the final checkpoint) unless [epoch] is given; the
+    base policy is labelled with its training epoch (1000; 900 for Pick and Place)
+  * can score the BASE (pretrained) policy
+  * reports per-subtask rates for coffee and thawing, via evaluation/patch_subtask_success.py
 
 Resumable: rollouts already scored are read back from the per-run JSON and skipped, so a
 re-run only does the remainder. One run per process so GPU/host memory is freed between runs.
@@ -16,8 +14,6 @@ re-run only does the remainder. One run per process so GPU/host memory is freed 
 """
 import os, sys, json, glob, gc, re
 os.environ.setdefault("MUJOCO_GL", "egl")
-os.environ.setdefault("HF_HUB_OFFLINE", "1")
-os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 import numpy as np, torch, imageio
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))

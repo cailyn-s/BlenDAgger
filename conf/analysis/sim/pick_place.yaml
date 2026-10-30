@@ -48,8 +48,8 @@ export:
     combined_blend: Blended
   rollouts:
     HG:
-      1: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_hg_dagger_PnPCounterToCab_round1.json
-      2: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_hg_dagger_PnPCounterToCab_round2.json
+      1: ${paths_db.base_save_path}/eval_composite_results/lemon_realmatch_hg_dagger_PnPCounterToCab_round1.json
+      2: ${paths_db.base_save_path}/eval_composite_results/lemon_realmatch_hg_dagger_PnPCounterToCab_round2.json
     Blended:
-      1: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_combined_blend_PnPCounterToCab_round1.json
-      2: ${paths_db.base_save_path}/eval_realmatch_results/lemon_realmatch_combined_blend_PnPCounterToCab_round2.json
+      1: ${paths_db.base_save_path}/eval_composite_results/lemon_realmatch_combined_blend_PnPCounterToCab_round1.json
+      2: ${paths_db.base_save_path}/eval_composite_results/lemon_realmatch_combined_blend_PnPCounterToCab_round2.json

@@ -12,8 +12,8 @@ hydra:
     dir: .
 model: diffusion
 env_name: PrepareCoffee
-run_name: coffee_recollect
-output_dir: analysis/results/coffee_recollect_sim
+run_name: coffee
+output_dir: analysis/results/coffee_sim
 plot_only: false
 obs_keys:
 - robot0_joint_pos
@@ -36,7 +36,7 @@ runs:
   hg_dagger: ${paths_db.sim_data_dir}/coffee_realmatch_hg_dagger_PrepareCoffee
   combined_blend: ${paths_db.sim_data_dir}/coffee_realmatch_combined_blend_PrepareCoffee
 export:
-  dataset: coffee_recollect_sim
+  dataset: coffee_sim
   study: expert
   task: coffee
   environment: sim

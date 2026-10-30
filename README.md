@@ -76,7 +76,9 @@ conda activate blendagger
 This installs the pinned packages in `requirements-sim.txt`, then robosuite, RoboCasa and robomimic
 at the commits used for the paper (in `third_party/`), and downloads the RoboCasa kitchen assets.
 
-> Requires Linux and an NVIDIA GPU whose driver supports CUDA 12.8. The asset download is about 5 GB.
+> Requires Linux and an NVIDIA GPU whose driver supports CUDA 12.8. Setup takes about 18 GB of disk
+> (conda env 8 GB, `third_party/` 10 GB) and asks before downloading the assets. The first evaluation
+> or collection also downloads the CLIP text encoder (1.6 GB) to `~/tmp/clip`.
 > Collecting new data also needs a 3Dconnexion SpaceMouse and a display.
 
 ### 3) Download the base policies and build the base demonstrations
@@ -147,14 +149,15 @@ python main.py --config-name sim/coffee/blendagger
 100 headless rollouts per checkpoint. `EVAL_ROUND` picks the round.
 
 ```bash
-# Prepare Coffee and Microwave Thawing -> eval_composite_results/
+# Fine-tuned policies -> eval_composite_results/
 EVAL_ROUND=3 python scripts/eval/eval_composite.py coffee_realmatch_combined_blend_PrepareCoffee
+EVAL_ROUND=3 python scripts/eval/eval_composite.py thawing_realmatch_combined_blend_MicrowaveThawing
+EVAL_ROUND=3 python scripts/eval/eval_composite.py lemon_realmatch_combined_blend_PnPCounterToCab
 
-# The base policy
+# The base policies
 python scripts/eval/eval_composite.py base:PrepareCoffee
-
-# Pick and Place -> eval_realmatch_results/
-EVAL_ROUND=3 python scripts/eval/eval_realmatch.py lemon_realmatch_combined_blend_PnPCounterToCab
+python scripts/eval/eval_composite.py base:MicrowaveThawing
+python scripts/eval/eval_composite.py base:PnPCounterToCab
 ```
 
 ### 3) Ablations (Prepare Coffee)

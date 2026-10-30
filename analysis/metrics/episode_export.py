@@ -402,7 +402,7 @@ def rollouts_from_folder(folder: str) -> list[dict]:
 
 
 def rollouts_from_realmatch(path: str) -> list[dict]:
-    """Rollout rows from a sim `eval_realmatch_results/*.json`, one row per element of `success`.
+    """Rollout rows from a sim `eval_composite_results/*.json`, one row per element of `success`.
 
     Every checkpoint the run evaluated is kept: `epochs.<epoch>.success` is already a per-rollout
     list, and which checkpoint to report is left to downstream code.
