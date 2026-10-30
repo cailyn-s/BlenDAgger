@@ -69,9 +69,9 @@ import numpy as np
 import torch
 
 _HERE = Path(__file__).parent
-_SCD  = _HERE.parent
-_ROOT = _SCD.parent
-for _p in [str(_ROOT), str(_SCD), str(_ROOT / "diffusion_policy"), str(_ROOT / "ACT")]:
+_REPO  = _HERE.parent
+_ROOT = _REPO.parent
+for _p in [str(_ROOT), str(_REPO), str(_ROOT / "diffusion_policy"), str(_ROOT / "ACT")]:
     if _p not in sys.path:
         sys.path.insert(0, _p)
 

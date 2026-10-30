@@ -1,5 +1,5 @@
 # Where data, checkpoints and results live. Relative paths are relative to the repo root, which is
-# where every command is run from. Override per machine with the SCD_* environment variables, or
+# where every command is run from. Override per machine with the BLENDAGGER_* environment variables, or
 # with conf/local/paths.yaml (gitignored; see conf/paths_local.example.yaml).
 defaults:
   - _self_
@@ -7,14 +7,14 @@ defaults:
 
 paths_db:
   # Collected rounds go under <base_save_path>/data, finetuned checkpoints under <base_save_path>/results.
-  base_save_path: ${oc.env:SCD_SAVE_DIR,.}
+  base_save_path: ${oc.env:BLENDAGGER_SAVE_DIR,.}
   sim_data_dir: ${paths_db.base_save_path}/data
   # Base demonstration datasets (patched_*.hdf5) the policies were pretrained on.
-  dataset_dir: ${oc.env:SCD_DATASET_DIR,${paths_db.base_save_path}/data}
+  dataset_dir: ${oc.env:BLENDAGGER_DATASET_DIR,${paths_db.base_save_path}/data}
   # Pretrained base policy checkpoints.
-  checkpoint_dir: ${oc.env:SCD_CHECKPOINT_DIR,${paths_db.base_save_path}/checkpoints}
+  checkpoint_dir: ${oc.env:BLENDAGGER_CHECKPOINT_DIR,${paths_db.base_save_path}/checkpoints}
   # Real-robot collections, read by the real-robot analysis configs.
-  real_data_dir: ${oc.env:SCD_REAL_DATA_DIR,${paths_db.base_save_path}/data}
+  real_data_dir: ${oc.env:BLENDAGGER_REAL_DATA_DIR,${paths_db.base_save_path}/data}
 
   pnp_dataset: ${paths_db.dataset_dir}/patched_pnp_demo_gentex_im128_randcams.hdf5
   coffee_dataset: ${paths_db.dataset_dir}/patched_coffee_demo_im128.hdf5

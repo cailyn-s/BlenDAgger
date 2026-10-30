@@ -83,7 +83,7 @@ def run(cmd):
 PROC_FLAGS = ["--act-space", "eef", "--act-type", "rel",
               "--trim-zeros", "--resize-images", "--step-grip"]
 # Processing script from the companion xArm repository (this repo is a submodule of it by default).
-PROC_SCRIPT = os.environ.get("SCD_PROC_SCRIPT",
+PROC_SCRIPT = os.environ.get("BLENDAGGER_PROC_SCRIPT",
                              os.path.join(os.path.dirname(REPO), "scripts", "data_processing.py"))
 MAKE_PROC = True          # --no-make-proc turns this off
 
@@ -107,7 +107,7 @@ def ensure_proc(folder, label):
         return False
     if not os.path.exists(PROC_SCRIPT):
         warn(f"{label}: no proc_*.hdf5 and {PROC_SCRIPT} is missing — cannot make one "
-             "(the script lives in the companion xArm repository; point SCD_PROC_SCRIPT at it)")
+             "(the script lives in the companion xArm repository; point BLENDAGGER_PROC_SCRIPT at it)")
         return False
     out = os.path.join(folder, "proc_" + os.path.basename(full))
     print(f"  [proc] {label}: building {os.path.basename(out)} ...", end=" ", flush=True)

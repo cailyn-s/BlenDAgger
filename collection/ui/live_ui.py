@@ -191,7 +191,7 @@ _PAGE = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Shared-Control Live</title>
+<title>BlenDAgger Live</title>
 <style>
   :root { color-scheme: light;
           /* Bars scale with the window; clamp keeps them sane on tiny/huge screens. */

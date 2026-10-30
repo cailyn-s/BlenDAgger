@@ -13,7 +13,7 @@ class CustomSpaceMouse(SpaceMouse):
     - Spacebar (keyboard): Release Control to Robot Policy
     - Both Buttons (Hold > 1s): Reset Environment
 
-    stale_timeout (or SCD_SPACEMOUSE_STALE_S): if no HID packet arrives within this
+    stale_timeout (or BLENDAGGER_SPACEMOUSE_STALE_S): if no HID packet arrives within this
     time, motion is zeroed instead of replaying the last packet (e.g. for a puck
     forwarded over the network). Disabled by default.
     """
@@ -37,7 +37,7 @@ class CustomSpaceMouse(SpaceMouse):
         self._pending_gripper = None
 
         # HID freshness — set before super() since it starts the reader thread.
-        self._stale_timeout = float(os.environ.get("SCD_SPACEMOUSE_STALE_S", 0.0)) if stale_timeout is None else float(stale_timeout)
+        self._stale_timeout = float(os.environ.get("BLENDAGGER_SPACEMOUSE_STALE_S", 0.0)) if stale_timeout is None else float(stale_timeout)
         self._last_packet_t = None
         self._packet_count = 0
         self._stale_trips = 0

@@ -103,9 +103,9 @@ bash scripts/data/build_base_datasets.sh PrepareCoffee   # or only some
 Skip this if you used the layout above. Otherwise, either set environment variables:
 
 ```bash
-export SCD_DATASET_DIR=/path/to/data           # base demonstrations
-export SCD_CHECKPOINT_DIR=/path/to/checkpoints # base policies
-export SCD_SAVE_DIR=/path/to/storage           # where data/ and results/ are read and written
+export BLENDAGGER_DATASET_DIR=/path/to/data           # base demonstrations
+export BLENDAGGER_CHECKPOINT_DIR=/path/to/checkpoints # base policies
+export BLENDAGGER_SAVE_DIR=/path/to/storage           # where data/ and results/ are read and written
 ```
 
 or copy [`conf/paths_local.example.yaml`](conf/paths_local.example.yaml) to `conf/local/paths.yaml`
@@ -266,7 +266,7 @@ python analysis/run_analysis_suite.py --config cupboard   # also almond, cupboar
 ```
 
 Rounds without a processed `proc_*.hdf5` are processed with `scripts/data_processing.py` from the
-companion repository; set `SCD_PROC_SCRIPT` if it is not at `../scripts/data_processing.py`.
+companion repository; set `BLENDAGGER_PROC_SCRIPT` if it is not at `../scripts/data_processing.py`.
 
 ### Using another robot
 
