@@ -35,6 +35,7 @@ logs/
 # Machine-local folders (symlinks into local storage, outputs, notes, external clones)
 /data
 /results
+/checkpoints
 notes/
 analysis/results/
 # Exploratory code kept out of the release

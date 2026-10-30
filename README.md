@@ -81,7 +81,7 @@ at the commits used for the paper (in `third_party/`), and downloads the RoboCas
 
 ### 3) Download the base policies and build the base demonstrations
 
-Download the base policies from **<DATA_URL>** into `checkpoints/`:
+Download the base policies from [Google Drive](https://drive.google.com/drive/folders/17RKUXBqgtbGBzAF6WZo2b553Trj7g9I0?usp=sharing) into `checkpoints/`:
 
 ```
 checkpoints/
